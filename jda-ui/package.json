@@ -1,0 +1,60 @@
+{
+  "name": "jda-ui",
+  "version": "1.1.01",
+  "description": "custom react components ts project",
+  "author": "ovieokeh",
+  "license": "Apache-2.0",
+  "repository": "jeremy0anderson/j-ui",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.0",
+    "framer-motion": "^7.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.10.0",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "framer-motion": "^7.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^2.78.0",
+    "rollup-plugin-sass": "^1.2.13",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.7.4"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "typescript",
+    "npm"
+  ],
+  "dependencies": {
+    "@react-buddy/ide-toolbox": "^2.2.1",
+    "@react-buddy/palette-mui": "^1.2.2",
+    "react-router-dom": "^6.3.0",
+    "rollup-plugin-css": "^1.0.10"
+  }
+}
