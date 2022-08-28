@@ -1,0 +1,22 @@
+@media(max-width:600px){
+  #menu-toggle {
+    display: flex!important;
+    color:white;
+  }
+  #navbar-menu-main{
+    display: none!important;
+  }
+}
+#navbar-menu-main{
+  display:flex;
+  align-content: center;
+  align-items: center;
+  padding:0;
+  text-align-all: center;
+  position: absolute;
+  right: 0;
+}
+#menu-toggle{
+  display:none;
+
+}
