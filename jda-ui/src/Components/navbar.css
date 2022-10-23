@@ -1,0 +1,24 @@
+#Navbar-main{
+    position: absolute;
+    top:0;
+    left: 0;
+
+}
+#Toolbar-main{
+    height: 70px;
+    background: lightgray;
+}
+.c{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.fh{
+    height: 100%;
+}
+.fw{
+    width: 100%;
+}
+.vw{
+    width: 100vw;
+}

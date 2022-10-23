@@ -156,7 +156,8 @@ class Navigation extends React.Component<NavigationProps, NavigationState>{
     constructor(props:NavigationProps) {
         super(props);
         this.state = {
-            drawerOpen: false
+            drawerOpen: false,
+            activeLink:""
         }
         this.toggle=this.toggle.bind(this);
     }

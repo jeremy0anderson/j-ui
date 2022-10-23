@@ -6,6 +6,7 @@ export interface NavigationProps {
 }
 export interface NavigationState {
     drawerOpen: boolean;
+    activeLink: string;
 }
 export interface DrawerProps {
     anchor: 'top' | 'left' | 'right' | 'permanent-left';
