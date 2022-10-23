@@ -1,6 +1,7 @@
 import {FC, useEffect, createRef} from "react";
 import * as React from 'react';
 import {NextParticle as NP} from '../particle';
+// import bub from '../bub.png'
 export enum NextParticleRenderer {
     webgl = 'webgl',
     default = 'default',

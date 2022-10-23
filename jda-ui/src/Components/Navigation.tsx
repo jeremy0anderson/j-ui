@@ -5,6 +5,7 @@ import * as M from '@mui/material';
 import * as I from '@mui/icons-material';
 import {Link as RLink} from 'react-router-dom';
 import './navigation.css';
+import {Toggle} from './Toggle';
 // import {BrowserRouter} from 'react-router-dom';
 
 import {NavigationState, NavigationProps, DrawerProps, DrawerState, MenuProps, PermanentMenuProps} from './Interface';
@@ -133,7 +134,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
     Top = (props:DrawerProps) => {
         return (
             <DrawerContainer
-                initial={{height: 0}}
+                initial={{height: 0, overflow: 'hidden'}}
                 animate={{height: props.open?props.items.length*60:0, }}
                 transition={{type:'spring',duration: 0.3}}
                 style={{zIndex: 1000, right: 0,background: props.menuBackground, width: "100vw", position:"fixed", top: 60, left: 0}}
@@ -220,14 +221,14 @@ class Navigation extends React.Component<NavigationProps, NavigationState>{
         return(
             <>
             <Navbar
-                style={{position: "fixed", top: 0, left: 0, zIndex:1000}}
+                style={{position: "fixed", top: 0, left: 0, zIndex:1000, background: this.props.background || "rgba(10, 10, 10, 0.2)"}}
                 animate={animateProps}
                 transition={{type: "spring", duration: 0.3}}>
                 <Toolbar style={{display: 'flex'}}>
                     <M.IconButton
                         id={"menu-toggle"}
                         onClick={this.toggle}>
-                            <I.MenuOutlined />
+                            <Toggle open={this.state.drawerOpen}/>
                     </M.IconButton>
                     <this.TopMenu items={this.props.items} open={this.state.drawerOpen}/>
                 </Toolbar>
@@ -245,13 +246,16 @@ class Navigation extends React.Component<NavigationProps, NavigationState>{
         )
     }
 }
-
 export {Navigation};
+
 // function Test(){
 //     return(
 //         <BrowserRouter>
 //         <Navigation
-//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
+//             background={"#000"}
+//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'}
+//           // background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}
+//         />
 //         </BrowserRouter>
 //     )
 // }

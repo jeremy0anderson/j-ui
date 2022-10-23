@@ -15,7 +15,7 @@ let tick;
 let rotationX = 0;
 let rotationY = 0;
 
-const NextParticle = class NextParticle {
+export const NextParticle = class NextParticle {
   constructor(optionsParam) {
     let options = {};
     if (optionsParam) {
@@ -30,8 +30,7 @@ const NextParticle = class NextParticle {
         options = optionsParam;
       }
     }
-    this.xOffset = options.xOffset || 0;
-    this.yOffset = options.yOffset || 0;
+    this.xOffset = options.xOffset;
     this.state = 'stopped';
     this.touches = [];
     this.on('imageLoaded', this._onImageLoaded);
@@ -104,9 +103,9 @@ const NextParticle = class NextParticle {
           document.body.addEventListener('touchend', this._clearTouches);
           document.body.addEventListener('touchcancel', this._clearTouches);
         } else {
-          this.canvas.addEventListener('mousemove', this._mouseHandler);
-          this.canvas.addEventListener('mouseout', this._clearTouches);
-          this.canvas.addEventListener('click', this._clickHandler);
+          document.body.addEventListener('mousemove', this._mouseHandler);
+          document.body.addEventListener('mouseout', this._clearTouches);
+          document.body.addEventListener('click', this._clickHandler);
         }
       }
       this._animate();
@@ -123,9 +122,9 @@ const NextParticle = class NextParticle {
     document.body.removeEventListener('touchend', this._clearTouches);
     document.body.removeEventListener('touchcancel', this._clearTouches);
     if (this.canvas) {
-      this.canvas.removeEventListener('mousemove', this._mouseHandler);
-      this.canvas.removeEventListener('mouseout', this._clearTouches);
-      this.canvas.removeEventListener('click', this._clickHandler);
+      document.body.removeEventListener('mousemove', this._mouseHandler);
+      document.body.removeEventListener('mouseout', this._clearTouches);
+      document.body.removeEventListener('click', this._clickHandler);
     }
   }
   
@@ -143,9 +142,9 @@ const NextParticle = class NextParticle {
     return e => {
       this.touches = [
         {
-          x:  e.offsetX,
-          y: e.clientY,
-          z: 4 + (this.layerCount - 1) * this.layerDistance,
+          x: e.offsetX,
+          y: e.offsetY,
+          z: 49 + (this.layerCount - 1) * this.layerDistance,
           force: 1,
         },
       ];
@@ -193,7 +192,7 @@ const NextParticle = class NextParticle {
     this.imageRatio = this.imageWidth / this.imageHeight;
     this.width = this.width || this.imageWidth;
     this.height = this.height || this.imageHeight;
-    this.renderSize = (this.width + this.height) / 10;
+    this.renderSize = (this.width + this.height) / 4;
     if (this.srcImage) {
       this.srcImage.style.display = 'none';
     }
@@ -277,7 +276,7 @@ const NextParticle = class NextParticle {
 
         void main(void) {
           gl_Position = rotationMatrix * perspectiveMatrix * modelViewMatrix * vec4(mirror * vertexPosition + vertexOffset, vertexPosition);
-          gl_PointSize = pointSize + max((log(vertexPosition.z) - 9.91) * depth, -pointSize + 1.0);
+          gl_PointSize = pointSize + max((log(vertexPosition.z) - 3.91) * depth, -pointSize + 1.0);
           vColor = vertexColor;
         }
       `;
@@ -311,7 +310,7 @@ const NextParticle = class NextParticle {
     this.context.bindBuffer(this.context.ARRAY_BUFFER, this.vertexBuffer);
     this.context.clear(this.context.COLOR_BUFFER_BIT | this.context.DEPTH_BUFFER_BIT);
     this.vertexOffset = this.context.getUniformLocation(this.program, 'vertexOffset');
-    this.context.uniform3f(this.vertexOffset, this.xOffset, this.yOffset, 1000);
+    this.context.uniform3f(this.vertexOffset, this.xOffset, this.yOffset || 0, 1000);
     this.context.vertexAttribPointer(this.vertexPosition, 3.0, this.context.FLOAT, false, 28, 0);
     this.context.vertexAttribPointer(this.vertexColor, 4.0, this.context.FLOAT, false, 28, 12);
     this.uModelViewMatrix = this.context.getUniformLocation(this.program, 'modelViewMatrix');
@@ -855,7 +854,7 @@ const NextParticle = class NextParticle {
         }
       }
     }
-    this.speed = Math.log(this.origins.length) / 20;
+    this.speed = Math.log(this.origins.length) / 10;
     this.gravityFactor = 1 - this.gravity * this.speed;
   }
   
@@ -883,5 +882,3 @@ const NextParticle = class NextParticle {
     return color;
   }
 };
-
-export {NextParticle};

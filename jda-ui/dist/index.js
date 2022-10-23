@@ -120,6 +120,31 @@ function styleInject(css, ref) {
 var css_248z$1 = "@media(max-width:600px){\n  #menu-toggle {\n    display: flex!important;\n    color:white;\n  }\n  #navbar-menu-main{\n    display: none!important;\n  }\n}\n#navbar-menu-main{\n  display:flex;\n  align-content: center;\n  align-items: center;\n  padding:0;\n  text-align-all: center;\n  position: absolute;\n  right: 0;\n}\n#menu-toggle{\n  display:none;\n\n}";
 styleInject(css_248z$1);
 
+function Toggle(props) {
+    const lineVariants = {
+        closed: (line) => {
+            switch (line) {
+                case 0: return { x1: 0, y1: 5, x2: 25, y2: 5 };
+                case 1: return { x1: 0, y1: 12.5, x2: 25, y2: 12.5 };
+                case 2: return { x1: 0, y1: 20, x2: 25, y2: 20 };
+                default: return {};
+            }
+        },
+        open: (line) => {
+            switch (line) {
+                case 0: return { x1: 5, y1: 5, x2: 20, y2: 20 };
+                case 1: return { x1: -5, y1: 12.5, x2: -5, y2: 12.5 };
+                case 2: return { x1: 5, y1: 20, x2: 20, y2: 5 };
+                default: return {};
+            }
+        }
+    };
+    return (React__namespace.createElement(Framer.motion.svg, { stroke: "rgba(238,238,238,0.99)", viewBox: "0 0 25 25", strokeLinecap: "round", strokeWidth: 2, height: 25, width: 25 },
+        React__namespace.createElement(Framer.motion.line, { custom: 0, animate: props.open ? "open" : "closed", initial: "closed", variants: lineVariants }),
+        React__namespace.createElement(Framer.motion.line, { custom: 1, animate: props.open ? "open" : "closed", initial: "closed", variants: lineVariants }),
+        React__namespace.createElement(Framer.motion.line, { custom: 2, animate: props.open ? "open" : "closed", initial: "closed", variants: lineVariants })));
+}
+
 const LinkRef = React__namespace.forwardRef((props, ref) => {
     return React__namespace.createElement(reactRouterDom.Link, Object.assign({ ref: ref, to: props.to }, props));
 }), Link = Framer__namespace.motion(LinkRef);
@@ -238,10 +263,10 @@ class Navigation extends React__namespace.Component {
                 break;
         }
         return (React__namespace.createElement(React__namespace.Fragment, null,
-            React__namespace.createElement(Navbar, { style: { position: "fixed", top: 0, left: 0, zIndex: 1000 }, animate: animateProps, transition: { type: "spring", duration: 0.3 } },
+            React__namespace.createElement(Navbar, { style: { position: "fixed", top: 0, left: 0, zIndex: 1000, background: this.props.background || "rgba(10, 10, 10, 0.2)" }, animate: animateProps, transition: { type: "spring", duration: 0.3 } },
                 React__namespace.createElement(Toolbar, { style: { display: 'flex' } },
                     React__namespace.createElement(M__namespace.IconButton, { id: "menu-toggle", onClick: this.toggle },
-                        React__namespace.createElement(I__namespace.MenuOutlined, null)),
+                        React__namespace.createElement(Toggle, { open: this.state.drawerOpen })),
                     React__namespace.createElement(this.TopMenu, { items: this.props.items, open: this.state.drawerOpen }))),
             React__namespace.createElement(Drawer, { onToggle: this.toggle, items: this.props.items, anchor: this.props.anchor, open: this.state.drawerOpen, menuBackground: this.props.menuBackground }),
             React__namespace.createElement(motion.div, { transition: { duration: 0.3, type: 'spring' }, animate: { opacity: this.state.drawerOpen ? 1 : 0, visibility: this.state.drawerOpen ? "visible" : "hidden" }, onClick: () => {
@@ -257,7 +282,10 @@ class Navigation extends React__namespace.Component {
 //     return(
 //         <BrowserRouter>
 //         <Navigation
-//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
+//             // background={"#000"}
+//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'}
+//           // background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}
+//         />
 //         </BrowserRouter>
 //     )
 // }
