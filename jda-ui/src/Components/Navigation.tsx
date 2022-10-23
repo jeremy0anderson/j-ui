@@ -41,7 +41,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
         <motion.ul
             style={{zIndex: 1010, listStyleType:'none', display: 'flex', flexDirection: 'column', padding: 0, justifyContent:"center", alignItems: 'center', alignContent: 'center', margin: 0, left: 0, overflow: 'hidden'}}
             transition={{duration: 0.3, type:'spring'}}
-            animate={{left: props.open?"-100%":0, height: props.open?props.items.length*60:0}}>
+            animate={{left: props.open?"-100%":0, height:props.items.length*60}}>
             {props.items.map((item, index)=>{
                 return (
                     <Link
@@ -134,7 +134,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
         return (
             <DrawerContainer
                 initial={{height: 0}}
-                animate={{height: props.open?250:0, }}
+                animate={{height: props.open?props.items.length*60:0, }}
                 transition={{type:'spring',duration: 0.3}}
                 style={{zIndex: 1000, right: 0,background: props.menuBackground, width: "100vw", position:"fixed", top: 60, left: 0}}
             >
@@ -152,6 +152,8 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
         }
     }
 }
+
+
 class Navigation extends React.Component<NavigationProps, NavigationState>{
     constructor(props:NavigationProps) {
         super(props);
@@ -218,7 +220,7 @@ class Navigation extends React.Component<NavigationProps, NavigationState>{
         return(
             <>
             <Navbar
-                style={{position: "fixed", top: 0, left: 0, zIndex:999, boxShadow: "0 4px 7px", background: this.props.background?this.props.background:"white"}}
+                style={{position: "fixed", top: 0, left: 0, zIndex:1000}}
                 animate={animateProps}
                 transition={{type: "spring", duration: 0.3}}>
                 <Toolbar style={{display: 'flex'}}>
@@ -249,7 +251,7 @@ export {Navigation};
 //     return(
 //         <BrowserRouter>
 //         <Navigation
-//             anchor={"top"} items={["Home", "About", "Contact"''} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
+//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
 //         </BrowserRouter>
 //     )
 // }

@@ -145,7 +145,7 @@ const Toolbar = styled__default["default"]('div') `
 class Drawer extends React__namespace.Component {
     constructor(props) {
         super(props);
-        this.Menu = (props) => (React__namespace.createElement(motion.ul, { style: { zIndex: 1010, listStyleType: 'none', display: 'flex', flexDirection: 'column', padding: 0, justifyContent: "center", alignItems: 'center', alignContent: 'center', margin: 0, left: 0, overflow: 'hidden' }, transition: { duration: 0.3, type: 'spring' }, animate: { left: props.open ? "-100%" : 0, height: props.open ? props.items.length * 60 : 0 } }, props.items.map((item, index) => {
+        this.Menu = (props) => (React__namespace.createElement(motion.ul, { style: { zIndex: 1010, listStyleType: 'none', display: 'flex', flexDirection: 'column', padding: 0, justifyContent: "center", alignItems: 'center', alignContent: 'center', margin: 0, left: 0, overflow: 'hidden' }, transition: { duration: 0.3, type: 'spring' }, animate: { left: props.open ? "-100%" : 0, height: props.items.length * 60 } }, props.items.map((item, index) => {
             return (React__namespace.createElement(Link, { onClick: props.onToggle, whileHover: { scale: 1.1 }, key: item + "link", style: { width: props.anchor === "top" && props.open ? "100vw" : "auto", borderBottom: "1px solid black", zIndex: 1010, height: 60, textDecoration: 'none', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }, to: item.toLowerCase() === "home" ? "/" : `/${item.toLowerCase()}` },
                 React__namespace.createElement(motion.li, { key: item + index, animate: { width: props.open ? 250 : 0 }, transition: { type: 'spring', duration: 0.3 }, style: {
                         width: props.anchor === "top" ? "100vw" : "auto",
@@ -182,7 +182,7 @@ class Drawer extends React__namespace.Component {
                 React__namespace.createElement(this.Menu, { onToggle: props.onToggle, open: this.props.open, items: this.props.items })));
         };
         this.Top = (props) => {
-            return (React__namespace.createElement(DrawerContainer, { initial: { height: 0 }, animate: { height: props.open ? 250 : 0, }, transition: { type: 'spring', duration: 0.3 }, style: { zIndex: 1000, right: 0, background: props.menuBackground, width: "100vw", position: "fixed", top: 60, left: 0 } },
+            return (React__namespace.createElement(DrawerContainer, { initial: { height: 0 }, animate: { height: props.open ? props.items.length * 60 : 0, }, transition: { type: 'spring', duration: 0.3 }, style: { zIndex: 1000, right: 0, background: props.menuBackground, width: "100vw", position: "fixed", top: 60, left: 0 } },
                 React__namespace.createElement(this.Menu, { onToggle: props.onToggle, open: props.open, items: props.items, anchor: props.anchor })));
         };
         this.state = {};
@@ -238,7 +238,7 @@ class Navigation extends React__namespace.Component {
                 break;
         }
         return (React__namespace.createElement(React__namespace.Fragment, null,
-            React__namespace.createElement(Navbar, { style: { position: "fixed", top: 0, left: 0, zIndex: 999, boxShadow: "0 4px 7px", background: this.props.background ? this.props.background : "white" }, animate: animateProps, transition: { type: "spring", duration: 0.3 } },
+            React__namespace.createElement(Navbar, { style: { position: "fixed", top: 0, left: 0, zIndex: 1000 }, animate: animateProps, transition: { type: "spring", duration: 0.3 } },
                 React__namespace.createElement(Toolbar, { style: { display: 'flex' } },
                     React__namespace.createElement(M__namespace.IconButton, { id: "menu-toggle", onClick: this.toggle },
                         React__namespace.createElement(I__namespace.MenuOutlined, null)),
@@ -257,7 +257,7 @@ class Navigation extends React__namespace.Component {
 //     return(
 //         <BrowserRouter>
 //         <Navigation
-//             anchor={"top"} items={["Home", "About", "Contact"''} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
+//             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'} background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}/>
 //         </BrowserRouter>
 //     )
 // }
@@ -407,9 +407,9 @@ const NextParticle = class NextParticle {
     return e => {
       this.touches = [
         {
-          x: e.offsetX,
-          y: e.offsetY,
-          z: 49 + (this.layerCount - 1) * this.layerDistance,
+          x:  e.offsetX,
+          y: e.clientY,
+          z: 4 + (this.layerCount - 1) * this.layerDistance,
           force: 1,
         },
       ];
@@ -1170,6 +1170,32 @@ const ParticleImage = settings => {
     });
     return React__namespace.createElement("div", { ref: wrapperRef, className: settings.className, style: Object.assign(Object.assign({}, settings.style), { display: 'flex', justifyContent: 'center', alignItems: 'center' }) });
 };
+// function Test(){
+//     return(
+//       <ParticleImage
+//         xOffset={10}
+//           initDirection={'none'}
+//           initPosition={'none'}
+//           width={300}
+//           mouseForce={90}
+//           renderer={"webgl"}
+//           gravity={0.095}
+//           noise={1}
+//           layerCount={5}
+//           layerDistance={2}
+//           particleSize={1}
+//           className={"next-particle"}
+//           clickStrength={800}
+//           particleGap={2}
+//           height={300}
+//           minWidth={300}
+//           minHeight={300}
+//           maxWidth={300}
+//           maxHeight={300}
+//           imageUrl={bub}
+//       />
+//     )
+// }
 
 var css_248z = ".motion-text > h1 > .word-wrapper > span {\n    font-size: 80px;\n    font-weight: 800;\n    margin: 0 0 20px;\n}\n.motion-text > h2 > .word-wrapper > span {\n    font-size: 50px;\n    font-weight: 700;\n    line-height: 1.4;\n    margin: 0;\n}\n.motion-text > h3 > .word-wrapper > span {\n    font-size: 40px;\n    font-weight: 5000;\n    line-height: 1.2;\n    margin: 0;\n}\n.motion-text > h4 > .word-wrapper > span {\n    font-size: 30px;\n    font-weight: 400;\n    line-height: 1.2;\n    opacity: 0.75;\n    margin: 0;\n}\n.motion-text > h5 > .word-wrapper > span {\n    font-size: 20px;\n    font-weight: 300;\n    line-height: 1;\n    opacity: 0.75;\n    margin: 0;\n}\n.motion-text > h6 > .word-wrapper > span {\n    font-size: 30px;\n    font-weight: 300;\n    line-height: 1;\n    margin: 0;\n}\n.motion-text > p > .word-wrapper > span {\n    font-size: 50px;\n    font-weight: bold;\n    line-height: 1.2;\n    margin: auto;\n}\n.word-wrapper {\n    white-space: nowrap;\n}";
 styleInject(css_248z);

@@ -5,27 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f12a7459-1c32-4f9d-bbfe-210347b264ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/Motion.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Navbar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Particle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Text.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Text.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/navbar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bub.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Components/Interface/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Components/Interface/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Components/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Components/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Interface/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Interface/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Navigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +14,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/particle.js" root0="SKIP_INSPECTION" />
@@ -49,22 +37,19 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ACTIVE_CLOUD_PROJECT_ACCOUNT": "jeremyjs.dev@gmail.com",
-    "ACTIVE_CLOUD_PROJECT_ID": "cloud-drive-client",
-    "ACTIVE_CLOUD_PROJECT_NAME": "cloud-drive-client",
-    "ACTIVE_CLOUD_PROJECT_NUMBER": "639670058387",
-    "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20221022_0000",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "/Users/jeremy/ja-ui-react/jda-ui/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="jeremyjs.dev@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="cloud-drive-client" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="cloud-drive-client" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="639670058387" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.google.cloudcode.ide_session_index" value="20221022_0002" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Components" />
@@ -96,7 +81,9 @@
       <workItem from="1665556751460" duration="740000" />
       <workItem from="1665953683403" duration="2147000" />
       <workItem from="1666068009895" duration="9767000" />
-      <workItem from="1666386962323" duration="705000" />
+      <workItem from="1666386962323" duration="914000" />
+      <workItem from="1666487779771" duration="27000" />
+      <workItem from="1666487836596" duration="1644000" />
     </task>
     <servers />
   </component>
