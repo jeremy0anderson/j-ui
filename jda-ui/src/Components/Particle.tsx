@@ -1,5 +1,5 @@
 import * as React from 'react';
-import img from '../background.png';
+// import img from "./Clipboard.svg";
 declare interface ParticleProps{
     width:number;
     height:number;
@@ -18,8 +18,12 @@ declare interface ParticleProps{
     text?:string;
     imageUrl?:string;
     canvasStyle?:any;
-    fillColor?:any;
+    strokeColor?:any;
+    area?:any;
 }
+//@ts-ignore
+const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 export function Particles(props:ParticleProps){
     const cRef:any = React.useRef(HTMLCanvasElement)
     const iRef:any = React.useRef(HTMLImageElement);
@@ -31,12 +35,11 @@ export function Particles(props:ParticleProps){
         canvas = cRef.current;
         ctx = canvas.getContext('2d', {willReadFrequently:true});
         image = iRef.current
-          // || new Image(100,100);
         canvas.width = props.width;
         canvas.height = props.height;
 
         class Particle {
-            originX:number;originY:number;effect:Effect;x:number;y:number;size:number;color:any;dx:number;dy:number;vx:number;vy:number;force:number;angle:number;distance:any;friction:number;ease:number;
+            area:any;originX:number;originY:number;effect:Effect;x:number;y:number;size:number;color:any;dx:number;dy:number;vx:number;vy:number;force:number;angle:number;distance:any;friction:number;ease:number;
             constructor(effect:Effect, x:number, y:number, color:any){
                 this.effect = effect;
                 this.x = this.originX = x;
@@ -47,27 +50,27 @@ export function Particles(props:ParticleProps){
                 this.dy = 0;
                 this.vx = 0;
                 this.vy = 0;
-                this.force = -1000;
+                this.force = 0;
                 this.angle = 0;
                 this.distance = 0;
                 this.friction = props.friction || 0.98;
                 this.ease = props.ease || 0.02;
+                this.area = props.area || 0;
             }
             update(){
                 this.dx = this.effect.mouse.x - this.x;
                 this.dy = this.effect.mouse.y - this.y;
                 this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-                this.force = -this.effect.mouse.radius / this.distance *2
-                if(0<this.distance < this.effect.mouse.radius) {
+                this.force = -this.effect.mouse.radius / this.distance*1.5;
+                if(props.area<this.distance < this.effect.mouse.radius) {
                     this.angle = Math.atan2(this.dy, this.dx);
                     this.vx += this.force * Math.cos(this.angle);
                     this.vy += this.force * Math.sin(this.angle);
                 }
-                this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
-                this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease
+                this.x += (this.vx *= this.friction) + (this.originX - this.x) *this.ease;
+                this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
             }
         }
-
         class Effect {
             mouse:{
                 x:number;
@@ -84,6 +87,7 @@ export function Particles(props:ParticleProps){
             y:number;
             gap:number;
             particles:Particle[]|any[];
+            _renderCount:number;
             constructor(width:number, height:number){
                 this.width = width;
                 this.height = height;
@@ -100,6 +104,7 @@ export function Particles(props:ParticleProps){
                     y: -Infinity,
                     down:false
                 }
+                this._renderCount = 0;
                 for (let key in props) {
                     this[key] = props[key];
                 }
@@ -144,8 +149,6 @@ export function Particles(props:ParticleProps){
 
                 let renderWidth = null;
                 let renderHeight= null;
-                // this.image.width/=2;
-                // this.image.height/=2
                 if (args.image) {
                     let imageWidth = image.width;
                     let imageHeight = image.height;
@@ -202,19 +205,27 @@ export function Particles(props:ParticleProps){
                     }
                 }
                 context.clearRect(0, 0, this.width, this.height);
-
             }
+            get renderCount(){
+                return this._renderCount;
+            }
+
+            set renderCount(value){
+                this._renderCount = value;
+            }
+
             update(){
                 for(var i = 0; i < this.particles.length; i++) {
                     this.particles[i].update();
                 }
             }
             render(context:CanvasRenderingContext2D){
+                this.renderCount=0;
                 context.clearRect(0, 0, this.width, this.height);
                 for(var i = 0; i < this.particles.length; i++) {
                     var p = this.particles[i];
                     context.fillStyle = p.color;
-                    if (props.fillColor){
+                    if (props.strokeColor){
                         context.strokeStyle ="red";
                     }
                     context.beginPath();
@@ -222,10 +233,13 @@ export function Particles(props:ParticleProps){
                     // context.fillRect(p.x, p.y, p.size, p.size);
                     // context.strokeRect(p.x,p.y, p.size*4, p.size*4)
                     context.closePath();
-                    context.stroke();
+                    if (props.strokeColor){
+                        context.stroke();
+                    }
                     context.fill();
                 }
             }
+
             stop(canvas:HTMLCanvasElement){
                 canvas.removeEventListener('mouseup', () => {
                     this.mouse.down = false;
@@ -240,7 +254,7 @@ export function Particles(props:ParticleProps){
                 canvas.removeEventListener('mouseleave', ()=>{
                     this.mouse.x = -Infinity;
                     this.mouse.y = -Infinity;
-                })
+                });
 
                 canvas.parentElement?.removeEventListener("touchstart", (event:TouchEvent) => {
                     this.mouse.x = event.changedTouches[0].clientX;
@@ -261,51 +275,54 @@ export function Particles(props:ParticleProps){
             }
             // this = null;
         }
-            let effect:any  = new Effect(props.width, props.height);
+        let effect:any  = new Effect(props.width, props.height);
         function animate() {
             effect.update();
             effect.render(ctx);
             requestAnimationFrame(animate);
         }
-        if (props.imageUrl) {
-            image.onload = function () {
-                // image.width = canvas.width- image.width/2;
-                // image.height = canvas.height  -image.height/2;
-                effect.init(ctx, {image});
+            if (props.imageUrl) {
+                image.onload = function() {
+                    effect.init(ctx, { image });
+                    animate();
+                    effect.start(canvas);
+                }
+            }
+            if (!props.imageUrl) {
+                let text = props.text || "";
+                effect.init(ctx, { text });
                 animate();
                 effect.start(canvas);
             }
-        }
-        if (!props.imageUrl){
-            let text = props.text || "";
-            effect.init(ctx, {text});
-            effect.start(canvas);
-            animate();
-        }
-        return ()=>{
-            effect.stop(canvas)
-            // effect = undefined;
-        }
-    },[])
+            return () => {
+                effect.stop(canvas)
+            }
+    },[window.innerWidth, window.innerHeight])
     return(
       <div style={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center', zIndex: 900}} >
           <canvas style={props.canvasStyle} ref={cRef} width={props.width} height={props.height} />
-          {
-            props.imageUrl && (<img src={props.imageUrl} alt={"particle-image"} ref={iRef} style={{display: 'none'}}/>)
-          }
-
+          {props.imageUrl &&
+            (<img src={props.imageUrl} alt={"particle-image"} ref={iRef} style={{display: 'none'}}/>
+          )}
       </div>
     )
 }
 
-function Test(){
-    return(
-      <Particles width={window.innerWidth} height={window.innerHeight} friction={0.8} ease={0.12} size={1} gap={1} radius={30}
-                 imageUrl={img}
-                 // text={"Hi"}
-                 // fontSize={150}
-                 // font={"sans-serif"}
-                 // color={"#000"}
-      />
-    )
-}
+// function Test(){
+//     return(
+//       <Particles width={window.innerWidth}
+//                  height={window.innerHeight}
+//                  friction={.69}
+//                  ease={0.12}
+//                  size={0.7}
+//                  gap={1}
+//                  radius={90}
+//                  imageUrl={img}
+//                  // area={500}
+//                  // text={"Placeholder"}
+//                  // fontSize={150}
+//                  // font={"sans-serif"}
+//                  // color={"#000"}
+//       />
+//     )
+// }
