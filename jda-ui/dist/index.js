@@ -207,7 +207,7 @@ class Drawer extends React__namespace.Component {
                 React__namespace.createElement(this.Menu, { onToggle: props.onToggle, open: this.props.open, items: this.props.items })));
         };
         this.Top = (props) => {
-            return (React__namespace.createElement(DrawerContainer, { initial: { height: 0 }, animate: { height: props.open ? props.items.length * 60 : 0, }, transition: { type: 'spring', duration: 0.3 }, style: { zIndex: 1000, right: 0, background: props.menuBackground, width: "100vw", position: "fixed", top: 60, left: 0 } },
+            return (React__namespace.createElement(DrawerContainer, { initial: { height: 0, overflow: 'hidden' }, animate: { height: props.open ? props.items.length * 60 : 0, }, transition: { type: 'spring', duration: 0.3 }, style: { zIndex: 1000, right: 0, background: props.menuBackground, width: "100vw", position: "fixed", top: 60, left: 0 } },
                 React__namespace.createElement(this.Menu, { onToggle: props.onToggle, open: props.open, items: props.items, anchor: props.anchor })));
         };
         this.state = {};
@@ -282,7 +282,7 @@ class Navigation extends React__namespace.Component {
 //     return(
 //         <BrowserRouter>
 //         <Navigation
-//             // background={"#000"}
+//             background={"#000"}
 //             anchor={"top"} items={["Home", "About", "Contact"]} menuBackground={'rgb(40,40,40)'}
 //           // background={"linear-gradient(-45deg, rgb(125, 10, 201) 0%, rgb(125, 0, 100) 100%)"}
 //         />
@@ -322,8 +322,7 @@ const NextParticle = class NextParticle {
         options = optionsParam;
       }
     }
-    this.xOffset = options.xOffset || 0;
-    this.yOffset = options.yOffset || 0;
+    this.xOffset = options.xOffset;
     this.state = 'stopped';
     this.touches = [];
     this.on('imageLoaded', this._onImageLoaded);
@@ -435,9 +434,9 @@ const NextParticle = class NextParticle {
     return e => {
       this.touches = [
         {
-          x:  e.offsetX,
-          y: e.clientY,
-          z: 4 + (this.layerCount - 1) * this.layerDistance,
+          x: e.offsetX,
+          y: e.offsetY,
+          z: 49 + (this.layerCount - 1) * this.layerDistance,
           force: 1,
         },
       ];
@@ -485,7 +484,7 @@ const NextParticle = class NextParticle {
     this.imageRatio = this.imageWidth / this.imageHeight;
     this.width = this.width || this.imageWidth;
     this.height = this.height || this.imageHeight;
-    this.renderSize = (this.width + this.height) / 10;
+    this.renderSize = (this.width + this.height) / 4;
     if (this.srcImage) {
       this.srcImage.style.display = 'none';
     }
@@ -569,7 +568,7 @@ const NextParticle = class NextParticle {
 
         void main(void) {
           gl_Position = rotationMatrix * perspectiveMatrix * modelViewMatrix * vec4(mirror * vertexPosition + vertexOffset, vertexPosition);
-          gl_PointSize = pointSize + max((log(vertexPosition.z) - 9.91) * depth, -pointSize + 1.0);
+          gl_PointSize = pointSize + max((log(vertexPosition.z) - 3.91) * depth, -pointSize + 1.0);
           vColor = vertexColor;
         }
       `;
@@ -603,7 +602,7 @@ const NextParticle = class NextParticle {
     this.context.bindBuffer(this.context.ARRAY_BUFFER, this.vertexBuffer);
     this.context.clear(this.context.COLOR_BUFFER_BIT | this.context.DEPTH_BUFFER_BIT);
     this.vertexOffset = this.context.getUniformLocation(this.program, 'vertexOffset');
-    this.context.uniform3f(this.vertexOffset, this.xOffset, this.yOffset, 1000);
+    this.context.uniform3f(this.vertexOffset, this.xOffset, this.yOffset || 0, 1000);
     this.context.vertexAttribPointer(this.vertexPosition, 3.0, this.context.FLOAT, false, 28, 0);
     this.context.vertexAttribPointer(this.vertexColor, 4.0, this.context.FLOAT, false, 28, 12);
     this.uModelViewMatrix = this.context.getUniformLocation(this.program, 'modelViewMatrix');
@@ -1144,7 +1143,7 @@ const NextParticle = class NextParticle {
         }
       }
     }
-    this.speed = Math.log(this.origins.length) / 20;
+    this.speed = Math.log(this.origins.length) / 10;
     this.gravityFactor = 1 - this.gravity * this.speed;
   }
   
@@ -1173,6 +1172,7 @@ const NextParticle = class NextParticle {
   }
 };
 
+// import bub from '../bub.png'
 exports.NextParticleRenderer = void 0;
 (function (NextParticleRenderer) {
     NextParticleRenderer["webgl"] = "webgl";
@@ -1185,7 +1185,7 @@ const ParticleImage = settings => {
         np = new NextParticle(Object.assign(Object.assign({}, settings), { wrapperElement: wrapperRef.current }));
         if (!np.events.stopped) {
             np.on('stopped', function () {
-                this.canvas.remove();
+                np.canvas.remove();
             });
         }
     };

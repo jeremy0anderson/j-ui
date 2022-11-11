@@ -15,8 +15,10 @@ let tick;
 let rotationX = 0;
 let rotationY = 0;
 
-export const NextParticle = class NextParticle {
+export const NextParticle = class NextParticle extends React.Component{
   constructor(optionsParam) {
+    super(optionsParam);
+    this.ref = React.createRef();
     let options = {};
     if (optionsParam) {
       if (optionsParam.nodeName) {
@@ -103,9 +105,9 @@ export const NextParticle = class NextParticle {
           document.body.addEventListener('touchend', this._clearTouches);
           document.body.addEventListener('touchcancel', this._clearTouches);
         } else {
-          document.body.addEventListener('mousemove', this._mouseHandler);
-          document.body.addEventListener('mouseout', this._clearTouches);
-          document.body.addEventListener('click', this._clickHandler);
+          this.canvas.addEventListener('mousemove', this._mouseHandler);
+          this.canvas.addEventListener('mouseout', this._clearTouches);
+          this.canvas.addEventListener('click', this._clickHandler);
         }
       }
       this._animate();
@@ -122,9 +124,9 @@ export const NextParticle = class NextParticle {
     document.body.removeEventListener('touchend', this._clearTouches);
     document.body.removeEventListener('touchcancel', this._clearTouches);
     if (this.canvas) {
-      document.body.removeEventListener('mousemove', this._mouseHandler);
-      document.body.removeEventListener('mouseout', this._clearTouches);
-      document.body.removeEventListener('click', this._clickHandler);
+      this.canvas.removeEventListener('mousemove', this._mouseHandler);
+      this.canvas.removeEventListener('mouseout', this._clearTouches);
+      this.canvas.removeEventListener('click', this._clickHandler);
     }
   }
   
@@ -226,6 +228,7 @@ export const NextParticle = class NextParticle {
     this.canvas = options.canvas;
     if (!this.canvas && !this.context && this.wrapperElement) {
       this.canvas = document.createElement('canvas');
+      // this.canvas = this.ref.current;
       this.wrapperElement.appendChild(this.canvas);
     }
     if (this.convas) {
@@ -569,8 +572,8 @@ export const NextParticle = class NextParticle {
       origin = this.origins[index];
       particle = this.particles[index];
       if (!particle.isDead && !particle.isHidden) {
-        x = ~~particle.x;
-        y = ~~particle.y;
+        x = particle.x;
+        y = particle.y;
         a = origin.color[3];
         if (this.alphaFade > 0 && this.layerCount > 1) {
           z = Math.max(Math.min(particle.z, this.maxZ), this.minZ) - this.minZ;
@@ -828,7 +831,7 @@ export const NextParticle = class NextParticle {
               this.origins.push({
                 x: this.offsetX + x,
                 y: this.offsetY + y,
-                z: layerIndex * this.layerDistance + 50,
+                z: layerIndex * this.layerDistance + 55,
                 color: this.colorArr,
                 tick,
                 seed,
@@ -843,7 +846,7 @@ export const NextParticle = class NextParticle {
               this.origins.push({
                 x: this.offsetX + x,
                 y: this.offsetY + y,
-                z: layerIndex * this.layerDistance + 50,
+                z: layerIndex * this.layerDistance + 55,
                 color: [r, g, b, a],
                 tick,
                 seed,
@@ -854,7 +857,7 @@ export const NextParticle = class NextParticle {
         }
       }
     }
-    this.speed = Math.log(this.origins.length) / 10;
+    this.speed = Math.log(this.origins.length) / 20;
     this.gravityFactor = 1 - this.gravity * this.speed;
   }
   
@@ -880,5 +883,10 @@ export const NextParticle = class NextParticle {
     } else return undefined;
     
     return color;
+  }
+  render(){
+    return(
+      <canvas ref={this.ref}></canvas>
+    )
   }
 };
