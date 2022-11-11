@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f12a7459-1c32-4f9d-bbfe-210347b264ed" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/Components/Clipboard.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Particle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Particle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/particle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/particle.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
