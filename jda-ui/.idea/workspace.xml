@@ -5,10 +5,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f12a7459-1c32-4f9d-bbfe-210347b264ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Clipboard.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Particle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphql.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Components/AnimatedTxt.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Components/Interface/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Components/Navigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Components/Switch.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Components/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Config/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Config/motion.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/code/cache/46529cee39eb6d1712b8f61a9e424514f688f614" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/code/cache/74534898e38000a79b853885f431d92c04145d22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/code/cache/ca684b1c2e6aa3301e31eb5d745a848b212bbdd6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/code/cache/f40f01d11324e890a4be65fc4fde1687b9d51ec9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/code/cache/f47532bb93b5d31ee06f52a4ac221f797a5892fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/semanticDiagnostics/cache/46529cee39eb6d1712b8f61a9e424514f688f614" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/semanticDiagnostics/cache/74534898e38000a79b853885f431d92c04145d22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/semanticDiagnostics/cache/ca684b1c2e6aa3301e31eb5d745a848b212bbdd6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/semanticDiagnostics/cache/f40f01d11324e890a4be65fc4fde1687b9d51ec9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/semanticDiagnostics/cache/f47532bb93b5d31ee06f52a4ac221f797a5892fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/syntacticDiagnostics/cache/46529cee39eb6d1712b8f61a9e424514f688f614" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/syntacticDiagnostics/cache/74534898e38000a79b853885f431d92c04145d22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/syntacticDiagnostics/cache/ca684b1c2e6aa3301e31eb5d745a848b212bbdd6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/syntacticDiagnostics/cache/f40f01d11324e890a4be65fc4fde1687b9d51ec9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/syntacticDiagnostics/cache/f47532bb93b5d31ee06f52a4ac221f797a5892fd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/2273676c432137b70b0ee0efa365c5706ed43d2e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/2aebf2287b3cbd6e271f6a673ecddd7dd8b9e7a5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/357fcc327346f18a33cd26b28c8fafa793a66bd7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/56afd84a54f879a21baab0537f96efe7314e1760" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/753371b33699e9c6a44562c227291388ce9610e0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/89f3c991477d2aee12c82fb541548c25e4c61ff4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/9e22cf2bb0960ba551095d6633dfdc4563ed238c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/c684cf956f199b1678bc943111a3eaff9ec284c1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/d938709513f9aae69b4ef7e2103a2b539193c7c3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.cache/rollup-plugin-typescript2/rpt2_e3146cb30e77aaa504c6f7bedef50cfe7e74366f/types/cache/ffaa2750da9f22f869d868eb50051df96a146bf6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Clipboard.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bub.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Motion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Motion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Particle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Particle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Text.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/particle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/particle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +89,20 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "/Users/jeremy/ja-ui-react/jda-ui/src/Components",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "/Users/jeremy/ja-ui-react/jda-ui/node_modules/typescript/lib"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="jeremyjs.dev@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="jeremyjs-dev-backend" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="jeremyjs-dev-backend" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="1078042565015" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.google.cloudcode.ide_session_index" value="20221123_0001" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Components" />
@@ -89,11 +142,22 @@
       <workItem from="1666835227227" duration="11000" />
       <workItem from="1666915210570" duration="3573000" />
       <workItem from="1668151072741" duration="4397000" />
+      <workItem from="1668579482554" duration="16716000" />
+      <workItem from="1668621652615" duration="2280000" />
+      <workItem from="1668642367988" duration="35607000" />
+      <workItem from="1668817397182" duration="7973000" />
+      <workItem from="1669019802631" duration="38000" />
+      <workItem from="1669198221602" duration="2506000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/particle.js" />
+      </list>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

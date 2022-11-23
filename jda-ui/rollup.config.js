@@ -16,5 +16,5 @@ export default {
     }
   ],
   plugins: [postcss({extensions:['.css']}),typescript(), resolve()],
-  external: ['react', 'react-dom', '@nextui-org/react', 'framer-motion', 'react-router-dom', 'styled-components', '@emotion/react', '@mui/material', '@mui/icons-material']
+  external: ['react', 'react-dom', '@nextui-org/react', 'framer-motion', 'react-router-dom', 'styled-components']
 }

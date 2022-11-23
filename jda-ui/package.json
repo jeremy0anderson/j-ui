@@ -1,6 +1,6 @@
 {
-  "name": "ja-ui-next",
-  "version": "4.0.0",
+  "name": "interactive-ui",
+  "version": "1.0.0",
   "description": "React component library",
   "author": "Jeremy Anderson",
   "license": "Apache-2.0",
@@ -15,34 +15,23 @@
     "start": "rollup -c -w"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.10.0",
-    "framer-motion": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5",
-    "typescript": "^4.8.2"
+    "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.10.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "framer-motion": "^7.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "rollup": "^2.78.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sass": "^1.2.13",
     "rollup-plugin-typescript2": "^0.32.1",
     "styled-components": "^5.3.5",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^4.8.2"
   },
   "files": [
@@ -52,13 +41,5 @@
     "react",
     "typescript",
     "npm"
-  ],
-  "dependencies": {
-    "@nextui-org/react": "^1.0.0-beta.10",
-    "framer-motion": "^7.1.2",
-    "react-router-dom": "^6.3.0",
-    "rollup-plugin-css": "^1.0.10",
-    "rollup-plugin-postcss": "^4.0.2",
-    "typescript": "^4.8.2"
-  }
+  ]
 }

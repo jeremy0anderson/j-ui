@@ -100,7 +100,7 @@ const AnimatedText = (props:AnimatedTextProps) => {
     );
 };
 
-function Text(props:AnimatedTextProps) {
+function Text(props:AnimatedTextProps):JSX.Element {
     const container = {
         hidden: {
             overflow: "hidden",
