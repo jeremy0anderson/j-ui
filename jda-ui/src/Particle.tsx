@@ -42,6 +42,8 @@ export function Particles(props:ParticleProps){
         image = iRef.current
         canvas.width = props.width;
         canvas.height = props.height;
+        canvas.style.touchAction = "none";
+        canvas.style.msTouchAction = "none";
 
         class Particle {
             area:any;originX:number;originY:number;effect:Effect;x:number;y:number;size:number;color:any;dx:number;dy:number;vx:number;vy:number;force:number;angle:number;distance:any;friction:number;ease:number;
@@ -410,7 +412,9 @@ export function Particles(props:ParticleProps){
             }
     },[])
     return(
-      <div ref={wRef} style={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center', zIndex: 900}}>
+      <div ref={wRef} style={{
+          touchAction:"none", msTouchAction: "none",
+          width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center', zIndex: 900}}>
           {props.imageUrl &&
             (<img src={props.imageUrl} alt={"particle-image"} ref={iRef} style={{display: 'none'}}/>
           )}

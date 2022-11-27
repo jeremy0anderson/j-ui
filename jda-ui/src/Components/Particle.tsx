@@ -1,16 +1,20 @@
 import * as React from "react"
-// import logo from "../Clipboard.svg";
+// import PropTypes from 'prop-types';
+// import logo from "./box.svg";
 //@ts-ignore
 const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame, cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
-let newCanvas = document.createElement("canvas");
-let canvas:HTMLCanvasElement, ctx:CanvasRenderingContext2D|any, image:HTMLImageElement|any;
-export declare interface ParticleProps {
+let canvas:HTMLCanvasElement|any = document.createElement('canvas'), ctx:CanvasRenderingContext2D|any, image:HTMLImageElement|any;
+export declare type ParticleProps = {
+    alphaLimit:number|boolean;
     image?: HTMLImageElement | string;
-    id?: string | any;
+    id?: string;
     width: number;
     height: number;
     friction:number;
     ease:number;
+    style?:{}
+    grid?:boolean;
+    connect:boolean;
     gap:number;
     radius:number;
     minWidth?:number; minHeight?:number;
@@ -21,11 +25,13 @@ export declare interface ParticleProps {
     fontSize?:number;
     size:number;
     lineWidth?:number;
+    canvasBackground:string;
     lineColor?:string;
     imageUrl?:string;
     text?:string;
 }
-export function Particle(props:ParticleProps) {
+export const Particle:React.FC = (props:ParticleProps)=>{
+
     // const cRef:any = React.useRef(HTMLCanvasElement);
     const iRef:any = React.useRef();
     const wRef:any = React.useRef();
@@ -33,10 +39,9 @@ export function Particle(props:ParticleProps) {
     React.useEffect(() => {
         image = iRef.current;
         let wrapper:HTMLDivElement= wRef.current;
-        newCanvas.id=props.id;
-        canvas = newCanvas
+        canvas.id = props.id;
         ctx = canvas.getContext("2d", { willReadFrequently: true })
-        if (props.image) {
+        if (props.imageUrl) {
             image = iRef.current
         }
         canvas.width = props.width
@@ -50,7 +55,7 @@ export function Particle(props:ParticleProps) {
                 this.x = this.originX = x
                 this.y = this.originY = y
                 this.size = size || 0.5
-                this.color = color
+                this.color = color || "black"
                 this.dx = 0
                 this.dy = 0
                 this.vx = 0
@@ -59,39 +64,51 @@ export function Particle(props:ParticleProps) {
                 this.angle = 0
                 this.distance = 0
                 this.friction = props.friction || 0.98
-                this.ease = props.ease || 0.02
+                this.ease = props.ease || 0.0789
             }
             update() {
-                let speed = Math.log(this.effect.particles.length) /10;
+                let speed = Math.log(this.effect.particles.length) / 10;
 
                 // const original = this.color;
                 this.dx = this.effect.mouse.x - this.x
                 this.dy = this.effect.mouse.y - this.y
-                this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy)
+                this.distance = Math.sqrt((this.dx * this.dx)+ (this.dy * this.dy))
                 this.force = (-this.effect.mouse.radius / this.distance);
                 this.angle = Math.atan2(this.dy, this.dx)
                 //@ts-ignore
                 if (0 < this.distance <= this.effect.mouse.radius) {
-                    this.vx += this.force
-                        *Math.cos(this.angle) *speed;
-                    this.vy += this.force
-                        * Math.sin(this.angle) * speed;
-                    this.vx*=this.friction-this.ease;
-                    this.vy*=this.friction-this.ease;
+                    if (this.effect.mouse.down) {
+                        this.vx += this.force
+                          * Math.cos(this.angle)*speed;
+                        this.vy += this.force
+                          * Math.sin(this.angle)*speed;
+                        this.vx *= this.friction - this.ease;
+                        this.vy *= this.friction - this.ease;
+                        this.vx/= speed
+                        this.vy/=speed
+                    } else {
+                        this.vx += this.force
+                          * Math.cos(this.angle) * speed;
+                        this.vy += this.force
+                          * Math.sin(this.angle) *speed;
+                    }
                 }
+                this.vx *= this.friction -this.ease;
+                this.vy *= this.friction -this.ease;
                 this.x +=
-                    (this.vx) + (this.originX - this.x) * this.ease;
+                  (this.vx) + (this.originX - this.x) *this.ease*speed;
                 this.y +=
-                    (this.vy) + (this.originY - this.y) * this.ease;
+                  (this.vy) + (this.originY - this.y) *this.ease*speed;
             }
         }
         class Effect {
-            particles:Particle[];width;height;image:any;centerX;centerY;x;y;gap;mouse;
-            constructor(width:number, height:number) {
+            particles:Particle[];width;height;image:any;centerX;centerY;x;y;gap;mouse;context;
+            constructor(width:number, height:number, ctx:CanvasRenderingContext2D) {
                 this.width = width
                 this.height = height
                 this.image = iRef.current;
                 this.centerX = this.width / 2
+                this.context = ctx;
                 this.centerY = this.height / 2
                 this.x = props.width / 2 - this.image.width / 2
                 this.y = props.height / 2 - this.image.height / 2
@@ -107,31 +124,44 @@ export function Particle(props:ParticleProps) {
                 //     this[key] = props[key]
                 // }
             }
-            start(canvas:HTMLCanvasElement) {
-                canvas.addEventListener("mousedown", () => {
-                    this.mouse.down = true;
-                })
-                canvas.addEventListener('mouseup', ()=>{
-                    this.mouse.down = false;
-                })
-                canvas.addEventListener("mousemove", event => {
-                    this.mouse.x = event.offsetX
-                    this.mouse.y = event.offsetY
-                })
-                canvas.addEventListener("mouseleave", () => {
-                    this.mouse.x = -Infinity
-                    this.mouse.y = -Infinity
-                })
-
+            start(canvas:HTMLCanvasElement, window:Window) {
+                props.grid ?
+                  window.addEventListener("mousedown", () => {
+                      this.mouse.down = true;
+                  }) : canvas.addEventListener("mousedown", () => {
+                      this.mouse.down = true;
+                  });
+                props.grid ?
+                  window.addEventListener('mouseup', () => {
+                      this.mouse.down = false;
+                  }) : canvas.addEventListener('mouseup', () => {
+                      this.mouse.down = false;
+                  });
+                props.grid ?
+                  window.addEventListener("mousemove", event => {
+                      this.mouse.x = event.offsetX
+                      this.mouse.y = event.offsetY
+                  }) : canvas.addEventListener("mousemove", event => {
+                      this.mouse.x = event.offsetX
+                      this.mouse.y = event.offsetY
+                  })
+                props.grid ?
+                  window.addEventListener("mouseleave", () => {
+                      this.mouse.x = -Infinity
+                      this.mouse.y = -Infinity
+                  }) : canvas.addEventListener("mouseleave", () => {
+                      this.mouse.x = -Infinity
+                      this.mouse.y = -Infinity
+                  });
                 canvas.parentElement?.addEventListener("touchstart", event => {
-                    this.mouse.x = event.changedTouches[0].clientX
-                    this.mouse.y = event.changedTouches[0].clientY
+                    this.mouse.x = event.changedTouches[0].clientX+ window.pageXOffset
+                    this.mouse.y = event.changedTouches[0].clientY+ window.pageYOffset
                 })
 
                 canvas.parentElement?.addEventListener("touchmove", event => {
                     // event.preventDefault();
-                    this.mouse.x = event.targetTouches[0].clientX
-                    this.mouse.y = event.targetTouches[0].clientY
+                    this.mouse.x = event.targetTouches[0].clientX + window.pageXOffset
+                    this.mouse.y = event.targetTouches[0].clientY + window.pageYOffset;
                 })
 
                 canvas.parentElement?.addEventListener("touchend", () => {
@@ -178,7 +208,6 @@ export function Particle(props:ParticleProps) {
                     // canvas.width = renderWidth*props.scale ||1 /2;
                     // canvas.height=renderHeight*props.scale ||1 / 2;
                     // console.log(renderWidth, renderHeight);
-                    console.log(canvas);
                     if (props.color) {
                         context.fillStyle = props.color
                     }
@@ -204,18 +233,42 @@ export function Particle(props:ParticleProps) {
                 let pixels = context.getImageData(0, 0, this.width, this.height)
                     .data
                 var index
-                for (var y = 0; y < this.height; y += this.gap) {
-                    for (var x = 0; x < this.width; x += this.gap) {
+                // let area = Math.PI * this.mouse.radius * this.mouse.radius;
+
+                for (var y = 0; y < canvas.height; y += this.gap) {
+                    for (var x = 0; x < canvas.width; x += this.gap) {
                         index = (y * this.width + x) * 4
                         const red = pixels[index]
                         const green = pixels[index + 1]
                         const blue = pixels[index + 2]
                         const alpha = pixels[index + 3]
-
+                        // let dis = Math.sqrt((this.image.width/2-x)*(this.image.width/2-x)+(this.image.height-y)*(this.image.height-y))
                         let color = props.color?props.color:"rgba(" + red + "," + green + "," + blue + "," +alpha/255 +")"
-                        if (alpha > 200) {
+                        if (alpha/255 > 0 ) {
                             this.particles.push(new Particle(this, x, y, color, props.size))
                         }
+                        // if ()
+                    }
+                }
+                context.clearRect(0, 0, this.width, this.height)
+            }
+
+            init_grid(context:CanvasRenderingContext2D) {
+                let pixels = context.getImageData(0, 0, this.width, this.height)
+                  .data
+                let index;
+
+                for (let y = 0; y < canvas.height; y += this.gap) {
+                    for (let x = 0; x < canvas.width; x += this.gap) {
+                        index = (y * this.width + x) * 4
+                        const red = pixels[index]
+                        const green = pixels[index + 1]
+                        const blue = pixels[index + 2]
+                        const alpha = pixels[index + 3]
+                        // let dis = Math.sqrt((this.image.width/2-x)*(this.image.width/2-x)+(this.image.height-y)*(this.image.height-y))
+                        let color = props.color?props.color:"rgba(" + red + "," + green + "," + blue + "," +alpha/255 +")"
+                        this.particles.push(new Particle(this, x, y, color, props.size))
+                        // if ()
                     }
                 }
                 context.clearRect(0, 0, this.width, this.height)
@@ -268,7 +321,7 @@ export function Particle(props:ParticleProps) {
                         sdy = px.y - ptl.y;
                         // let mDist = Math.sqrt((mdx*mdx) + (mdy*mdy));
                         distance = Math.sqrt((sdx * sdx) + (sdy * sdy));
-                        if ( distance <=30) {
+                        if ( distance <= props.gap +5 && distance > 1) {
                             context.beginPath();
                             context.lineWidth=props.lineWidth || 0.5;
                             context.strokeStyle= props.lineColor? props.lineColor:px.color;
@@ -280,38 +333,58 @@ export function Particle(props:ParticleProps) {
                         }
                     }
                 }
-                context.clearRect(0, 0, this.width, this.height)
+                context.clearRect(0,0,this.width, this.height)
                 for (let i = 0; i < this.particles.length; i++){
                     let p = this.particles[i];
                         dx = this.mouse.x - p.x;
                         dy = this.mouse.y - p.y;
                         distance = Math.sqrt((dx * dx) + (dy * dy));
-                    if (distance <= props.radius) {
-                        if (this.mouse.down && this.gap >=4)
+                    if (distance >= props.radius) {
+                        if ( this.gap >= 3 && props.connect)
                             connect(context, p);
-                    } if (this.mouse.down && this.gap <4 && distance <= props.radius) {this.mouse.radius = props.radius+100}
+                    } if (this.mouse.down && this.gap <=4 && distance <= props.radius) {this.mouse.radius = props.radius+100}
                     else if (!this.mouse.down){this.mouse.radius=props.radius}
                     context.fillStyle=p.color;
+                    // context.rotate(0);
                     context.fillRect(p.x, p.y, p.size, p.size)
-
+                    // context.scale(1, 1);
+                    context.beginPath();
+                    context.strokeStyle="#fff";
+                    context.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                    context.closePath();
+                    context.fill();
                 }
+
             }
-            stop(canvas:HTMLCanvasElement) {
-                canvas.removeEventListener("mousedown", () => {
-                    this.mouse.down = true
-                })
-                canvas.removeEventListener("mousemove", event => {
-                    this.mouse.x = event.offsetX
-                    this.mouse.y = event.offsetY
-                })
-                canvas.removeEventListener('mouseup', ()=>{
-                    this.mouse.down = false;
-                })
-                canvas.removeEventListener("mouseleave", () => {
-                    this.mouse.x = -Infinity
-                    this.mouse.y = -Infinity
-                    this.mouse.down = false;
-                })
+            stop(canvas:HTMLCanvasElement, window:Window) {
+                props.grid ?
+                  window.removeEventListener("mousedown", () => {
+                      this.mouse.down = true;
+                  }) : canvas.removeEventListener("mousedown", () => {
+                      this.mouse.down = true;
+                  });
+                props.grid ?
+                  window.removeEventListener('mouseup', () => {
+                      this.mouse.down = false;
+                  }) : canvas.removeEventListener('mouseup', () => {
+                      this.mouse.down = false;
+                  });
+                props.grid ?
+                  window.removeEventListener("mousemove", event => {
+                      this.mouse.x = event.offsetX
+                      this.mouse.y = event.offsetY
+                  }) : canvas.removeEventListener("mousemove", event => {
+                      this.mouse.x = event.offsetX
+                      this.mouse.y = event.offsetY
+                  })
+                props.grid ?
+                  window.removeEventListener("mouseleave", () => {
+                      this.mouse.x = -Infinity
+                      this.mouse.y = -Infinity
+                  }) : canvas.removeEventListener("mouseleave", () => {
+                      this.mouse.x = -Infinity
+                      this.mouse.y = -Infinity
+                  });
                 canvas.parentElement?.removeEventListener("touchstart", event => {
                     this.mouse.x = event.changedTouches[0].clientX
                     this.mouse.y = event.changedTouches[0].clientY
@@ -327,11 +400,11 @@ export function Particle(props:ParticleProps) {
                     this.mouse.y = -Infinity
                 })
                 // wRef.current.children[0].remove()
-                canvas.remove();
+                // canvas.remove();
             }
         }
 
-        let effect = new Effect(props.width, props.height)
+        let effect = new Effect(props.width, props.height, ctx)
         function animate() {
             effect.update()
             effect.render(ctx)
@@ -341,16 +414,19 @@ export function Particle(props:ParticleProps) {
         }
         if (props.imageUrl) {
             image.onload = function() {
-                effect.init(ctx, { image })
+                props.grid?effect.init_grid(ctx):effect.init(ctx, { image })
                 animate()
-                effect.start(canvas)
+                effect.start(canvas, window)
             }
         }
         if (!props.imageUrl && props.text) {
             let text = props.text || ""
-            effect.init(ctx, { text })
+            props.grid?effect.init_grid(ctx):effect.init(ctx, { text })
             animate()
-            effect.start(canvas)
+            effect.start(canvas, window)
+        }
+        if (!props.imageUrl ){
+
         }
         wrapper.appendChild(canvas)
         // if (state.on === false){
@@ -358,8 +434,9 @@ export function Particle(props:ParticleProps) {
         //     effect = null;
         //     effect = new Effect(props.width, props.height)
         // }
+        canvas.style.background = props.canvasBackground;
         return () => {
-            effect.stop(canvas)
+            effect.stop(canvas,window);
             if (canvas) {
                 canvas.remove()
             }
@@ -369,11 +446,12 @@ export function Particle(props:ParticleProps) {
         <div
             ref={wRef}
             style={{
-                width: "100%",
-                height: "100%",
+                position: 'fixed',
+                width: "auto",
+                height: "auto",
                 justifyContent: "center",
                 alignItems: "center",
-                zIndex: 900
+                ...props.style
             }}>
                 <img
                     id={props.id}
@@ -385,3 +463,51 @@ export function Particle(props:ParticleProps) {
         </div>
     )
 }
+{/*Particle.propTypes = {*/}
+//     width: PropTypes.number.isRequired,
+//     height: PropTypes.number.isRequired,
+{/*    scale: PropTypes.number.isRequired,*/}
+{/*    size:PropTypes.number.isRequired,*/}
+//     radius:PropTypes.number.isRequired,
+//     friction:PropTypes.number.isRequired,
+//     ease:PropTypes.number.isRequired,
+//     gap:PropTypes.number.isRequired,
+//     maxWidth:PropTypes.number, minWidth:PropTypes.number,
+//     maxHeight:PropTypes.number, minHeight:PropTypes.number,
+//     imageUrl:PropTypes.string,
+//     text:PropTypes.any,
+//     font:PropTypes.string,
+//     color:PropTypes.string,
+//     lineWidth:PropTypes.number,
+//     lineColor:PropTypes.string,
+//     fontSize:PropTypes.number,
+//     id:PropTypes.string
+// };
+
+// function Test(){
+//     return(
+//       <Particle
+//         id={"1"}
+//         friction={0.98}
+//         fontSize={200}
+//         lineColor={"orangered"}
+//         ease={0.08892}
+//         canvasBackground={"#000"}
+//         style={{borderRadius: 20, overflow: 'hidden'}}
+//         imageUrl={logo}
+//         // connect
+//         lineWidth={1}
+//         text={"Particles"}
+//         width={500}
+//         height={500}
+//         size={1}
+//         minHeight={300}
+//         minWidth={300}
+//         gap={3}
+//         color={"#fff"}
+//         // grid
+//         radius={70}
+//         scale={1.8}
+//       />
+//     )
+// }

@@ -1,6 +1,6 @@
 import typescript from 'rollup-plugin-typescript2'
 import postcss from 'rollup-plugin-postcss'
-import resolve from 'rollup-plugin-node-resolve';
+import { default as nodeResolve } from 'rollup-plugin-node-resolve';
 import pkg from './package.json'
 
 export default {
@@ -15,6 +15,6 @@ export default {
       strict: false
     }
   ],
-  plugins: [postcss({extensions:['.css']}),typescript(), resolve()],
-  external: ['react', 'react-dom', '@nextui-org/react', 'framer-motion', 'react-router-dom', 'styled-components']
+  plugins: [postcss({extensions:['.css']}),typescript(), nodeResolve()],
+  external: ['react', 'react-dom', 'prop-types']
 }
